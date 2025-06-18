@@ -3,6 +3,7 @@
 'use client';
 
 import { useState, useEffect } from 'react';
+import Image from 'next/image';
 import ShowerTracker, { generateEmptyData } from '@/components/CommitGraph';
 import ShowerTrackerControls from '@/components/CommitGraphControls';
 import StinkyFriendButton from '@/components/StinkyFriendButton';
@@ -43,9 +44,25 @@ export default function Home() {
       <div className="container mx-auto py-16 px-6">
         <div className="max-w-4xl mx-auto">
           <header className="text-center mb-16">
-            <h1 className="text-4xl font-semibold text-slate-800 mb-3 tracking-tight">
+            <h1 className="text-4xl font-semibold text-slate-800 mb-6 tracking-tight">
               🚿 Shower as a Service (SaaS)
             </h1>
+            <div className="mb-6">
+              <a 
+                href="https://x.com/createdbymason/status/1935433850664153529"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="block mx-auto w-fit hover:opacity-80 transition-opacity cursor-pointer"
+              >
+                <Image
+                  src="/elon.jpeg"
+                  alt="Elon"
+                  width={300}
+                  height={300}
+                  className="mx-auto"
+                />
+              </a>
+            </div>
           </header>
           
           <div className="space-y-8">
@@ -58,7 +75,9 @@ export default function Home() {
             <ShowerTracker data={data} />
             
             <div className="text-center mb-8">
-
+              <p className="text-sm text-slate-600">
+                Aim for at least one shower per day for optimal hygiene
+              </p>
             </div>
 
             <div className="pt-8 border-t border-blue-200">
