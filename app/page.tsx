@@ -44,11 +44,8 @@ export default function Home() {
         <div className="max-w-4xl mx-auto">
           <header className="text-center mb-16">
             <h1 className="text-4xl font-semibold text-slate-800 mb-3 tracking-tight">
-              Shower Tracker
+              🚿 Shower as a Service (SaaS)
             </h1>
-            <p className="text-slate-600 text-lg">
-              Track your daily hygiene habits and build healthy routines
-            </p>
           </header>
           
           <div className="space-y-8">
