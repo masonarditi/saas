@@ -17,7 +17,7 @@ export default function ShowerTrackerControls({
       
       {hasShoweredToday && (
         <div className="text-green-600 font-medium">
-          ✅ You&rsquo;ve already showered today! Great job!
+          ✅ You've already showered today! Great job!
         </div>
       )}
       

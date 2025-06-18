@@ -1,4 +1,4 @@
- 
+/* eslint-disable @typescript-eslint/no-unused-expressions */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 'use client';
 
@@ -7,9 +7,12 @@ import Image from 'next/image';
 import ShowerTracker, { generateEmptyData } from '@/components/CommitGraph';
 import ShowerTrackerControls from '@/components/CommitGraphControls';
 import StinkyFriendButton from '@/components/StinkyFriendButton';
+import CapCheckPopup from '@/components/CapCheckPopup';
 
 export default function Home() {
   const [data, setData] = useState<any[]>([]);
+  const [selectedMajor, setSelectedMajor] = useState<'cs' | 'other' | null>('cs'); // Default to cs for now
+  const [showCapPopup, setShowCapPopup] = useState(false);
 
   useEffect(() => {
     setData(generateEmptyData());
@@ -18,9 +21,12 @@ export default function Home() {
   const today = new Date().toISOString().split('T')[0];
   const hasShoweredToday = data.find(day => day.date === today)?.count > 0;
 
-  const addShower = () => {
+  const handleYesClick = () => {
     if (hasShoweredToday) return;
-    
+    setShowCapPopup(true);
+  };
+
+  const actuallyAddShower = () => {
     setData(prevData => 
       prevData.map(day => {
         if (day.date === today) {
@@ -33,6 +39,7 @@ export default function Home() {
         return day;
       })
     );
+    setShowCapPopup(false);
   };
 
   const resetChart = () => {
@@ -73,7 +80,7 @@ export default function Home() {
               
               <div className="lg:w-64 w-full">
                 <ShowerTrackerControls
-                  onAddShower={addShower}
+                  onAddShower={handleYesClick}
                   onReset={resetChart}
                   hasShoweredToday={hasShoweredToday}
                 />
@@ -81,6 +88,9 @@ export default function Home() {
             </div>
             
             <div className="text-center mb-8">
+              <p className="text-sm text-slate-600">
+                Aim for at least one shower per day for optimal hygiene
+              </p>
             </div>
 
             <div className="pt-8 border-t border-blue-200">
@@ -89,6 +99,12 @@ export default function Home() {
           </div>
         </div>
       </div>
+
+      <CapCheckPopup
+        isOpen={showCapPopup}
+        onClose={() => setShowCapPopup(false)}
+        onConfirm={actuallyAddShower}
+      />
     </main>
   );
 }
