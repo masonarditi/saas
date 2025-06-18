@@ -81,9 +81,6 @@ export default function Home() {
             </div>
             
             <div className="text-center mb-8">
-              <p className="text-sm text-slate-600">
-                Aim for at least one shower per day for optimal hygiene
-              </p>
             </div>
 
             <div className="pt-8 border-t border-blue-200">
