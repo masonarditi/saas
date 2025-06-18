@@ -42,7 +42,7 @@ export default function Home() {
   return (
     <main className="min-h-screen bg-gradient-to-br from-sky-50 to-blue-50">
       <div className="container mx-auto py-16 px-6">
-        <div className="max-w-4xl mx-auto">
+        <div className="max-w-6xl mx-auto">
           <header className="text-center mb-16">
             <h1 className="text-4xl font-semibold text-slate-800 mb-6 tracking-tight">
               🚿 Shower as a Service (SaaS)
@@ -66,13 +66,19 @@ export default function Home() {
           </header>
           
           <div className="space-y-8">
-            <ShowerTrackerControls
-              onAddShower={addShower}
-              onReset={resetChart}
-              hasShoweredToday={hasShoweredToday}
-            />
-
-            <ShowerTracker data={data} />
+            <div className="flex flex-col lg:flex-row gap-8 items-start">
+              <div className="flex-1">
+                <ShowerTracker data={data} />
+              </div>
+              
+              <div className="lg:w-64 w-full">
+                <ShowerTrackerControls
+                  onAddShower={addShower}
+                  onReset={resetChart}
+                  hasShoweredToday={hasShoweredToday}
+                />
+              </div>
+            </div>
             
             <div className="text-center mb-8">
               <p className="text-sm text-slate-600">
