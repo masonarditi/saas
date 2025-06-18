@@ -8,10 +8,11 @@ import ShowerTracker, { generateEmptyData } from '@/components/CommitGraph';
 import ShowerTrackerControls from '@/components/CommitGraphControls';
 import StinkyFriendButton from '@/components/StinkyFriendButton';
 import CapCheckPopup from '@/components/CapCheckPopup';
+import MajorSelectionPopup from '@/components/MajorSelectionPopup';
 
 export default function Home() {
   const [data, setData] = useState<any[]>([]);
-  const [selectedMajor, setSelectedMajor] = useState<'cs' | 'other' | null>('cs'); // Default to cs for now
+  const [showMajorPopup, setShowMajorPopup] = useState(true);
   const [showCapPopup, setShowCapPopup] = useState(false);
 
   useEffect(() => {
@@ -46,65 +47,76 @@ export default function Home() {
     setData(generateEmptyData());
   };
 
+  const handleSelectCS = () => {
+    setShowMajorPopup(false);
+  };
+
   return (
-    <main className="min-h-screen bg-gradient-to-br from-sky-50 to-blue-50">
-      <div className="container mx-auto py-16 px-6">
-        <div className="max-w-6xl mx-auto">
-          <header className="text-center mb-16">
-            <h1 className="text-4xl font-semibold text-slate-800 mb-6 tracking-tight">
-              🚿 Shower as a Service (SaaS)
-            </h1>
-            <div className="mb-6">
-              <a 
-                href="https://x.com/createdbymason/status/1935433850664153529"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="block mx-auto w-fit hover:opacity-80 transition-opacity cursor-pointer"
-              >
-                <Image
-                  src="/elon.jpeg"
-                  alt="Elon"
-                  width={300}
-                  height={300}
-                  className="mx-auto"
-                />
-              </a>
-            </div>
-          </header>
-          
-          <div className="space-y-8">
-            <div className="flex flex-col lg:flex-row gap-8 items-start">
-              <div className="flex-1">
-                <ShowerTracker data={data} />
+    <>
+      <main className="min-h-screen bg-gradient-to-br from-sky-50 to-blue-50">
+        <div className="container mx-auto py-16 px-6">
+          <div className="max-w-6xl mx-auto">
+            <header className="text-center mb-16">
+              <h1 className="text-4xl font-semibold text-slate-800 mb-6 tracking-tight">
+                🚿 Shower as a Service (SaaS)
+              </h1>
+              <div className="mb-6">
+                <a 
+                  href="https://x.com/createdbymason/status/1935433850664153529"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="block mx-auto w-fit hover:opacity-80 transition-opacity cursor-pointer"
+                >
+                  <Image
+                    src="/elon.jpeg"
+                    alt="Elon"
+                    width={300}
+                    height={300}
+                    className="mx-auto"
+                  />
+                </a>
+              </div>
+            </header>
+            
+            <div className="space-y-8">
+              <div className="flex flex-col lg:flex-row gap-8 items-start">
+                <div className="flex-1">
+                  <ShowerTracker data={data} />
+                </div>
+                
+                <div className="lg:w-64 w-full">
+                  <ShowerTrackerControls
+                    onAddShower={handleYesClick}
+                    onReset={resetChart}
+                    hasShoweredToday={hasShoweredToday}
+                  />
+                </div>
               </div>
               
-              <div className="lg:w-64 w-full">
-                <ShowerTrackerControls
-                  onAddShower={handleYesClick}
-                  onReset={resetChart}
-                  hasShoweredToday={hasShoweredToday}
-                />
+              <div className="text-center mb-8">
+                <p className="text-sm text-slate-600">
+                  Aim for at least one shower per day for optimal hygiene
+                </p>
               </div>
-            </div>
-            
-            <div className="text-center mb-8">
-              <p className="text-sm text-slate-600">
-                Aim for at least one shower per day for optimal hygiene
-              </p>
-            </div>
 
-            <div className="pt-8 border-t border-blue-200">
-              <StinkyFriendButton />
+              <div className="pt-8 border-t border-blue-200">
+                <StinkyFriendButton />
+              </div>
             </div>
           </div>
         </div>
-      </div>
 
-      <CapCheckPopup
-        isOpen={showCapPopup}
-        onClose={() => setShowCapPopup(false)}
-        onConfirm={actuallyAddShower}
+        <CapCheckPopup
+          isOpen={showCapPopup}
+          onClose={() => setShowCapPopup(false)}
+          onConfirm={actuallyAddShower}
+        />
+      </main>
+
+      <MajorSelectionPopup
+        isOpen={showMajorPopup}
+        onSelectCS={handleSelectCS}
       />
-    </main>
+    </>
   );
 }
