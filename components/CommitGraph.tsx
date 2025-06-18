@@ -42,21 +42,22 @@ export default function ShowerTracker({ data: externalData, onReset }: ShowerTra
 
   if (!isLoaded || !data || data.length === 0) {
     return (
-      <div className="bg-white p-6 rounded-xl shadow-lg border border-blue-100">
+      <div className="p-6 bg-white/80 backdrop-blur-sm rounded-xl border border-blue-100 shadow-sm">
         <div className="animate-pulse">
-          <div className="h-32 bg-slate-200 rounded-lg"></div>
+          <div className="h-32 bg-sky-100 rounded-lg"></div>
         </div>
       </div>
     );
   }
 
   return (
-    <div className="bg-white p-6 rounded-xl shadow-lg border border-blue-100">
+    <div className="p-6 bg-white/80 backdrop-blur-sm rounded-xl border border-blue-100 shadow-sm">
       <ActivityCalendar
         data={data}
+        colorScheme="light"
         theme={{
-          light: ['#f8fafc', '#e0f2fe', '#bae6fd', '#7dd3fc', '#38bdf8'],
-          dark: ['#f8fafc', '#e0f2fe', '#bae6fd', '#7dd3fc', '#38bdf8'],
+          light: ['#ffffff', '#bae6fd', '#7dd3fc', '#38bdf8', '#0ea5e9'],
+          dark: ['#ffffff', '#bae6fd', '#7dd3fc', '#38bdf8', '#0ea5e9']
         }}
         labels={{
           months: [

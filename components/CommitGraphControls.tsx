@@ -25,18 +25,18 @@ interface ShowerTrackerControlsProps {
     const { min, max } = getDateRange();
   
     return (
-      <div className="mb-6 p-4 bg-white rounded-lg shadow-lg border border-blue-100">
-        <div className="flex flex-col sm:flex-row gap-4 items-center">
-          <div className="flex flex-col gap-2">
+      <div className="p-6 bg-white/80 backdrop-blur-sm rounded-xl border border-blue-100 shadow-sm">
+        <div className="flex flex-col sm:flex-row gap-4 items-start sm:items-end">
+          <div className="flex flex-col gap-2 flex-1">
             <label htmlFor="date-picker" className="text-sm font-medium text-slate-700">
-              📅 Select Date:
+              Select Date
             </label>
             <input
               id="date-picker"
               type="date"
               value={selectedDate}
               onChange={(e) => onDateChange(e.target.value)}
-              className="px-3 py-2 border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+              className="px-3 py-2 bg-sky-50 border border-blue-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-sky-500 focus:border-sky-500 text-slate-700 transition-all duration-200"
               min={min}
               max={max}
             />
@@ -46,23 +46,23 @@ interface ShowerTrackerControlsProps {
             <button
               onClick={onAddShower}
               disabled={!selectedDate}
-              className="px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600 disabled:bg-slate-300 disabled:cursor-not-allowed transition-all duration-200 flex items-center gap-2 shadow-sm"
+              className="px-4 py-2 bg-sky-500 text-white rounded-lg hover:bg-sky-600 disabled:bg-slate-300 disabled:text-slate-500 disabled:cursor-not-allowed transition-all duration-200 text-sm font-medium shadow-sm hover:shadow-md"
             >
-              🚿 Add Shower
+              Add Shower
             </button>
             
             <button
               onClick={onReset}
-              className="px-4 py-2 bg-slate-500 text-white rounded-lg hover:bg-slate-600 transition-all duration-200 flex items-center gap-2 shadow-sm"
+              className="px-4 py-2 bg-white text-slate-700 rounded-lg hover:bg-slate-50 transition-all duration-200 text-sm font-medium border border-blue-200 shadow-sm hover:shadow-md"
             >
-              🔄 Reset
+              Reset
             </button>
           </div>
         </div>
         
         {selectedDate && (
-          <div className="mt-3 text-sm text-slate-600 bg-blue-50 px-3 py-2 rounded-lg">
-            <span className="font-medium">Selected:</span> {new Date(selectedDate).toLocaleDateString('en-US', { 
+          <div className="mt-4 text-sm text-slate-600 bg-blue-50 px-3 py-2 rounded-lg border border-blue-100">
+            Selected: {new Date(selectedDate).toLocaleDateString('en-US', { 
               weekday: 'long', 
               year: 'numeric', 
               month: 'long', 
