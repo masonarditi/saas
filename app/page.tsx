@@ -5,28 +5,28 @@
 import { useState, useEffect } from 'react';
 import ShowerTracker, { generateEmptyData } from '@/components/CommitGraph';
 import ShowerTrackerControls from '@/components/CommitGraphControls';
+import StinkyFriendButton from '@/components/StinkyFriendButton';
 
 export default function Home() {
   const [data, setData] = useState<any[]>([]);
-  const [selectedDate, setSelectedDate] = useState('');
 
   useEffect(() => {
     setData(generateEmptyData());
-    setSelectedDate(new Date().toISOString().split('T')[0]);
   }, []);
 
-  const addShower = () => {
-    if (!selectedDate) return;
+  const today = new Date().toISOString().split('T')[0];
+  const hasShoweredToday = data.find(day => day.date === today)?.count > 0;
 
+  const addShower = () => {
+    if (hasShoweredToday) return;
+    
     setData(prevData => 
       prevData.map(day => {
-        if (day.date === selectedDate) {
-          const newCount = day.count + 1;
-          const newLevel = Math.min(newCount, 4);
+        if (day.date === today) {
           return {
             ...day,
-            count: newCount,
-            level: newLevel
+            count: 1,
+            level: 1
           };
         }
         return day;
@@ -50,18 +50,19 @@ export default function Home() {
           
           <div className="space-y-8">
             <ShowerTrackerControls
-              selectedDate={selectedDate}
-              onDateChange={setSelectedDate}
               onAddShower={addShower}
               onReset={resetChart}
+              hasShoweredToday={hasShoweredToday}
             />
 
             <ShowerTracker data={data} />
             
-            <div className="text-center">
-              <p className="text-sm text-slate-600">
-                Aim for at least one shower per day for optimal hygiene
-              </p>
+            <div className="text-center mb-8">
+
+            </div>
+
+            <div className="pt-8 border-t border-blue-200">
+              <StinkyFriendButton />
             </div>
           </div>
         </div>
