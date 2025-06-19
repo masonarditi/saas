@@ -9,10 +9,12 @@ import ShowerTrackerControls from '@/components/CommitGraphControls';
 import StinkyFriendButton from '@/components/StinkyFriendButton';
 import CapCheckPopup from '@/components/CapCheckPopup';
 import MajorSelectionPopup from '@/components/MajorSelectionPopup';
+import ElonEntryScreen from '@/components/ElonEntryScreen';
 
 export default function Home() {
   const [data, setData] = useState<any[]>([]);
-  const [showMajorPopup, setShowMajorPopup] = useState(true);
+  const [showElonEntry, setShowElonEntry] = useState(true);
+  const [showMajorPopup, setShowMajorPopup] = useState(false);
   const [showCapPopup, setShowCapPopup] = useState(false);
 
   useEffect(() => {
@@ -47,10 +49,33 @@ export default function Home() {
     setData(generateEmptyData());
   };
 
+  const handleEnterMatrix = () => {
+    setShowElonEntry(false);
+    setShowMajorPopup(true);
+  };
+
   const handleSelectCS = () => {
     setShowMajorPopup(false);
   };
 
+  // Show Elon entry screen first
+  if (showElonEntry) {
+    return (
+      <ElonEntryScreen onEnterMatrix={handleEnterMatrix} />
+    );
+  }
+
+  // Show major selection popup
+  if (showMajorPopup) {
+    return (
+      <MajorSelectionPopup
+        isOpen={showMajorPopup}
+        onSelectCS={handleSelectCS}
+      />
+    );
+  }
+
+  // Show main app (when both popups are closed)
   return (
     <>
       <main className="min-h-screen bg-gradient-to-br from-sky-50 to-blue-50">
@@ -112,11 +137,6 @@ export default function Home() {
           onConfirm={actuallyAddShower}
         />
       </main>
-
-      <MajorSelectionPopup
-        isOpen={showMajorPopup}
-        onSelectCS={handleSelectCS}
-      />
     </>
   );
 }
