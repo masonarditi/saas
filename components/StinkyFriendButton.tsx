@@ -1,7 +1,7 @@
 export default function StinkyFriendButton() {
     const handleSendEmail = () => {
       const subject = encodeURIComponent("i heard you dont shower");
-      const body = encodeURIComponent("you lowkey stink bro... you need brogoshower.com");
+      const body = encodeURIComponent("you lowkey stink bro... you need https://brogoshower.vercel.app");
       const mailtoUrl = `mailto:?subject=${subject}&body=${body}`;
       
       window.open(mailtoUrl, '_blank');
