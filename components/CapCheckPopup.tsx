@@ -19,7 +19,7 @@ interface CapCheckPopupProps {
               onClick={onClose}
               className="px-6 py-3 bg-slate-200 text-slate-700 rounded-lg hover:bg-slate-300 transition-all duration-200 text-base font-medium w-full"
             >
-              You're right...
+              You&rsquo;re right...
             </button>
             
             <button

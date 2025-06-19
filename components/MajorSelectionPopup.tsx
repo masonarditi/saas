@@ -36,7 +36,7 @@ export default function MajorSelectionPopup({ isOpen, onSelectCS }: MajorSelecti
     <div className="fixed inset-0 bg-gradient-to-br from-sky-50 to-blue-50 flex items-center justify-center z-50">
       <div className="text-center space-y-8">
         <h1 className="text-4xl font-bold text-slate-800 mb-8">
-          What's your major?
+          What&#39;s your major?
         </h1>
         
         <div className="flex gap-6 justify-center">
